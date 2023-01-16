@@ -11,7 +11,7 @@ User::User(void)
 {
     this->GenerateID();
     this->GenerateRandomStatus();
-    std::cout << "Creating user...: " << id << " with status: " << status << "\n";
+    std::cout << "\nCreating user...: " << id << " with status: " << status << "\n";
 }
 User::User(int id)
 {
@@ -47,8 +47,10 @@ void User::TurnOn(void)
 
     if (!unsuccessful_incoming_calls.empty())
     {
-        std::cout << "\nUser ID: " << id;
-        std::cout << "\nThe following people tried to call you when you were off:\n";
+        std::cout << "\n-----------------------\n";
+        std::cout << "==== MESSAGE FOR USER: " << id << "\n";
+        std::cout << "-----------------------\n";
+        std::cout << "Following people tried to call you when you were off:\n";
         SortCallsByCallerID(unsuccessful_incoming_calls);
     }
    
@@ -82,19 +84,23 @@ bool User::GetStatus(void)
 
 void User::AddToIncomingCalls(int caller_id)
 {
-    std::cout << "\nUser ID: " << id << "\n";
-    if (status)
+    if (!status)
     {
-        std::cout << "Incoming call FROM " << caller_id << "\n";
         unsuccessful_incoming_calls.push(caller_id);
     }
+    /*else
+    {
+        std::cout << "\nUser ID: " << id << "\n";
+        std::cout << "Incoming call FROM " << caller_id << "\n";
+    }*/
+   
     incoming_calls.push(caller_id);
 }
 
 void User::AddToOutgoingCalls(int called_id)
 {
-    std::cout << "\nUser ID: " << id << "\n";
-    std::cout << "Outgoing call TO: " << called_id << "\n";
+   /* std::cout << "\nUser ID: " << id << "\n";
+    std::cout << "Outgoing call TO: " << called_id << "\n";*/
     outgoing_calls.push(called_id);
 }
 
